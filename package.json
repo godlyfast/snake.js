@@ -4,7 +4,9 @@
   "description": "Snake game for browser",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode=production",
+    "start": ""
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/godlyfast/snake.js/issues"
   },
-  "homepage": "https://github.com/godlyfast/snake.js#readme"
+  "homepage": "https://github.com/godlyfast/snake.js#readme",
+  "devDependencies": {
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
 }
