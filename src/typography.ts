@@ -3,7 +3,7 @@ import {
   TEXT_SIZE
 } from "./constants";
 
-export default class Typography {
+export class Typography {
   private ctx: CanvasRenderingContext2D;
   constructor(ctx: CanvasRenderingContext2D) {
     this.ctx = ctx;
