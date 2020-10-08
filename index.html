@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>The Snake</title>
+    <meta name="description" content="The Snake Game" />
+    <meta name="author" content="SitePoint" />
+  </head>
+
+  <body>
+    <div id="game-container"></div>
+    <script src="./snake.bundle.js"></script>
+    <script>
+      Snake({
+        container: document.getElementById("game-container"),
+        leaderBoard: localStorage.getItem('leaderBoard') ? JSON.parse(localStorage.getItem('leaderBoard')): [],
+        onLeaderBoardUpdated(leaderBoard) {
+            console.log('LD', leaderBoard)
+            localStorage.setItem('leaderBoard', JSON.stringify(leaderBoard))
+        }
+      });
+    </script>
+  </body>
+</html>
