@@ -9,4 +9,5 @@ export interface Point {
 export interface SnakeOptions {
   container: HTMLElement;
   leaderBoard: Array<Score>;
+  onLeaderBoardUpdated: Function;
 }

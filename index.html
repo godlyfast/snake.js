@@ -15,19 +15,11 @@
     <script>
       Snake({
         container: document.getElementById("game-container"),
-        leaderBoard: [
-            { name: "qwe", score: 999 },
-            { name: "rty", score: 888 },
-            { name: "uio", score: 777 },
-            { name: "pas", score: 666 },
-            { name: "dfg", score: 555},
-            { name: "hjk", score: 444 },
-            { name: "lzx", score: 333 },
-            { name: "cvb", score: 222 },
-            { name: "nmm", score: 111 },
-            { name: "asd", score: 34 },
-            { name: "asd", score: 33 },
-        ],
+        leaderBoard: localStorage.getItem('leaderBoard') ? JSON.parse(localStorage.getItem('leaderBoard')): [],
+        onLeaderBoardUpdated(leaderBoard) {
+            console.log('LD', leaderBoard)
+            localStorage.setItem('leaderBoard', JSON.stringify(leaderBoard))
+        }
       });
     </script>
   </body>

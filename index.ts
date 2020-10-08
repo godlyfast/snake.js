@@ -8,7 +8,7 @@ declare global {
 }
 
 if (typeof window !== undefined) {
-  window["Snake"] = function ({ container, leaderBoard }: SnakeOptions) {
-    return new Snake({container, leaderBoard});
+  window["Snake"] = function (options: SnakeOptions) {
+    return new Snake(options);
   };
 }

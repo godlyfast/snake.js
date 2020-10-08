@@ -129,12 +129,46 @@ export default class Snake {
     clearInterval(this.interval);
 
     if (
-      this.score > Math.min(...this.options.leaderBoard.map((e) => e.score))
+      this.score > Math.min(...this.options.leaderBoard.map((e) => e.score)) ||
+      !this.options.leaderBoard ||
+      this.options.leaderBoard.length < 10
     ) {
-      this.options.leaderBoard.push({ name: this.name, score: this.score });
-      this.options.leaderBoard.sort((a, b) => (a.score < b.score ? 1 : -1));
-      this.options.leaderBoard.splice(-1, 1);
+      const existing = this.options.leaderBoard.find(
+        (e) => e.name === this.name
+      );
+      if (existing) {
+        existing.score =
+          this.score > existing.score ? this.score : existing.score;
+      } else {
+        this.options.leaderBoard.push({ name: this.name, score: this.score });
+      }
+
+      this.options.leaderBoard.sort((a, b) =>
+        a.score < b.score
+          ? 1
+          : a.score === b.score
+          ? [a.name, b.name].sort()[0] === a.name
+            ? -1
+            : 1
+          : -1
+      );
+      if (this.options.leaderBoard.length > 10) {
+        this.options.leaderBoard.splice(-1, 1);
+      }
+      if (
+        this.options.onLeaderBoardUpdated &&
+        typeof this.options.onLeaderBoardUpdated === "function"
+      ) {
+        this.options.onLeaderBoardUpdated(this.options.leaderBoard);
+      }
     }
+    const genSpaces = (n: number) => {
+      let r = "";
+      for (let i = 0; i < n; i++) {
+        r += " ";
+      }
+      return r;
+    };
 
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -147,7 +181,12 @@ export default class Snake {
     let i = 0;
     for (let lead of this.options.leaderBoard) {
       this.typography.print(
-        [lead.name + " " + lead.score],
+        [
+          genSpaces(MAX_NAME_LEN - lead.name.length) +
+            lead.name +
+            " " +
+            lead.score,
+        ],
         500,
         BLOCK_SIZE + 80 * i
       );
@@ -194,10 +233,8 @@ export default class Snake {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = "white";
     this.typography.print(["input", " name"], 20, BLOCK_SIZE);
-
     this.typography.print([this.name], 20, 250);
-
-    this.typography.print(["then", "press", "enter"], 20, 400);
+    this.typography.print([" then", "press", "enter"], 20, 400);
   }
 
   tick() {
@@ -254,5 +291,3 @@ export default class Snake {
     this.renderGame();
   }
 }
-
-// export default game;
