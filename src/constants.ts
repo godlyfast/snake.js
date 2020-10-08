@@ -1,4 +1,4 @@
-export const CANVAS_WIDTH = 1200;
+export const CANVAS_WIDTH = 1600;
 export const CANVAS_HEIGHT = 1000;
 export const BLOCK_SIZE = 10;
 export const MIN_CLOCK = 30;

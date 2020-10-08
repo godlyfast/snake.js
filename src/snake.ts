@@ -30,7 +30,7 @@ export default class Snake {
 
   interval: number;
   dirty: boolean;
-  name = "none";
+  name = "";
 
   clock = MAX_CLOCK;
   gameStatus = GAME_STATUS_INIT;
@@ -107,7 +107,7 @@ export default class Snake {
         this.name = this.name.slice(0, -1);
         this.welcome();
       }
-      if (event.code === "Enter") {
+      if (event.code === "Enter" && this.name !== "") {
         this.startGame();
       }
     });
