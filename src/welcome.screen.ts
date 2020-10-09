@@ -1,8 +1,8 @@
 import { BLOCK_SIZE, GAME_STATUS_INIT, MAX_NAME_LEN } from "./constants";
-import Snake from "./snake";
+import { Engine } from "./engine";
 export class WelcomeScreen {
-  private engine: Snake;
-  constructor(engine: Snake) {
+  private engine: Engine;
+  constructor(engine: Engine) {
     this.engine = engine;
 
     document.addEventListener("keydown", (event) => {
@@ -19,14 +19,19 @@ export class WelcomeScreen {
         this.render();
       }
       if (event.code === "Enter" && this.engine.name !== "") {
-        this.engine.startGame();
+        this.engine.snakeScreen.startGame();
       }
     });
   }
   render() {
     this.engine.gameStatus = GAME_STATUS_INIT;
     this.engine.ctx.fillStyle = "black";
-    this.engine.ctx.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
+    this.engine.ctx.fillRect(
+      0,
+      0,
+      this.engine.canvas.width,
+      this.engine.canvas.height
+    );
     this.engine.ctx.fillStyle = "white";
     this.engine.typography.print(["input", " name"], 20, BLOCK_SIZE);
     this.engine.typography.print([this.engine.name], 20, 250);

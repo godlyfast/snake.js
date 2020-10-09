@@ -1,9 +1,9 @@
 import { BLOCK_SIZE, GAME_STATUS_OVER, MAX_NAME_LEN } from "./constants";
-import Snake from "./snake";
+import { Engine } from "./engine";
 
 export class GameOverScreen {
-  engine: Snake;
-  constructor(engine: Snake) {
+  engine: Engine;
+  constructor(engine: Engine) {
     this.engine = engine;
 
     document.addEventListener("keydown", (event) => {
@@ -11,7 +11,7 @@ export class GameOverScreen {
         case "Space":
         case "Enter":
           if (this.engine.gameStatus === GAME_STATUS_OVER) {
-            this.engine.startGame();
+            this.engine.snakeScreen.startGame();
           }
           break;
       }
@@ -20,10 +20,10 @@ export class GameOverScreen {
 
   render() {
     this.engine.gameStatus = GAME_STATUS_OVER;
-    clearInterval(this.engine.interval);
 
     if (
-      this.engine.score > Math.min(...this.engine.options.leaderBoard.map((e) => e.score)) ||
+      this.engine.snakeScreen.score >
+        Math.min(...this.engine.options.leaderBoard.map((e) => e.score)) ||
       !this.engine.options.leaderBoard ||
       this.engine.options.leaderBoard.length < 10
     ) {
@@ -32,9 +32,14 @@ export class GameOverScreen {
       );
       if (existing) {
         existing.score =
-          this.engine.score > existing.score ? this.engine.score : existing.score;
+          this.engine.snakeScreen.score > existing.score
+            ? this.engine.snakeScreen.score
+            : existing.score;
       } else {
-        this.engine.options.leaderBoard.push({ name: this.engine.name, score: this.engine.score });
+        this.engine.options.leaderBoard.push({
+          name: this.engine.name,
+          score: this.engine.snakeScreen.score,
+        });
       }
 
       this.engine.options.leaderBoard.sort((a, b) =>
@@ -53,7 +58,9 @@ export class GameOverScreen {
         this.engine.options.onLeaderBoardUpdated &&
         typeof this.engine.options.onLeaderBoardUpdated === "function"
       ) {
-        this.engine.options.onLeaderBoardUpdated(this.engine.options.leaderBoard);
+        this.engine.options.onLeaderBoardUpdated(
+          this.engine.options.leaderBoard
+        );
       }
     }
     const genSpaces = (n: number) => {
@@ -65,12 +72,29 @@ export class GameOverScreen {
     };
 
     this.engine.ctx.fillStyle = "black";
-    this.engine.ctx.fillRect(0, 0, this.engine.canvas.width, this.engine.canvas.height);
+    this.engine.ctx.fillRect(
+      0,
+      0,
+      this.engine.canvas.width,
+      this.engine.canvas.height
+    );
     this.engine.ctx.fillStyle = "white";
-    this.engine.typography.print([" game", " over"], BLOCK_SIZE * 2, BLOCK_SIZE);
-    this.engine.typography.print([" your", "score"], BLOCK_SIZE * 2, BLOCK_SIZE * 20);
+    this.engine.typography.print(
+      [" game", " over"],
+      BLOCK_SIZE * 2,
+      BLOCK_SIZE
+    );
+    this.engine.typography.print(
+      [" your", "score"],
+      BLOCK_SIZE * 2,
+      BLOCK_SIZE * 20
+    );
 
-    this.engine.typography.print(["" + this.engine.score], BLOCK_SIZE * 2, BLOCK_SIZE * 45);
+    this.engine.typography.print(
+      ["" + this.engine.snakeScreen.score],
+      BLOCK_SIZE * 2,
+      BLOCK_SIZE * 45
+    );
     this.engine.typography.print(["press", "space"], 20, BLOCK_SIZE * 80);
     let i = 0;
     for (let lead of this.engine.options.leaderBoard) {

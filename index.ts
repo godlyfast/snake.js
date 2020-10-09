@@ -1,4 +1,4 @@
-import Snake from "./src/snake";
+import { Engine } from "./src/engine";
 import { SnakeOptions } from "./src/interfaces";
 
 declare global {
@@ -9,6 +9,6 @@ declare global {
 
 if (typeof window !== undefined) {
   window["Snake"] = function (options: SnakeOptions) {
-    return new Snake(options);
+    return new Engine(options);
   };
 }
