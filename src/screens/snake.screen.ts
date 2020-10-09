@@ -1,5 +1,5 @@
 import {
-  BLOCK_SIZE,
+  GAME_BLOCK_SIZE,
   GAME_STATUS_IN_PROGRESS,
   MAX_CLOCK,
   MIN_CLOCK,
@@ -7,7 +7,7 @@ import {
 import { Point } from "../interfaces";
 import { Engine } from "../engine";
 import { getRandomInt } from "../util";
-
+const BLOCK_SIZE = GAME_BLOCK_SIZE
 export class SnakeScreen {
   engine: Engine;
 

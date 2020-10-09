@@ -1,3 +1,4 @@
+import { TEXT_SIZE } from './../constants';
 import { BLOCK_SIZE, GAME_STATUS_OVER, MAX_NAME_LEN } from "../constants";
 import { Engine } from "../engine";
 
@@ -95,7 +96,7 @@ export class GameOverScreen {
       BLOCK_SIZE * 2,
       BLOCK_SIZE * 45
     );
-    this.engine.typography.print(["press", "space"], 20, BLOCK_SIZE * 80);
+    this.engine.typography.print(["press", "space"], 2* BLOCK_SIZE, BLOCK_SIZE * 80);
     let i = 0;
     for (let lead of this.engine.options.leaderBoard) {
       this.engine.typography.print(
@@ -105,8 +106,8 @@ export class GameOverScreen {
             " " +
             lead.score,
         ],
-        500,
-        BLOCK_SIZE + 80 * i
+        TEXT_SIZE * 10,
+        (BLOCK_SIZE + TEXT_SIZE + (2 * BLOCK_SIZE)) * i + BLOCK_SIZE
       );
       i++;
     }

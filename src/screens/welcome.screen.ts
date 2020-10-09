@@ -1,3 +1,4 @@
+import { TEXT_SIZE } from './../constants';
 import { BLOCK_SIZE, GAME_STATUS_INIT, MAX_NAME_LEN } from "../constants";
 import { Engine } from "../engine";
 export class WelcomeScreen {
@@ -33,8 +34,8 @@ export class WelcomeScreen {
       this.engine.canvas.height
     );
     this.engine.ctx.fillStyle = "white";
-    this.engine.typography.print(["input", " name"], 20, BLOCK_SIZE);
-    this.engine.typography.print([this.engine.name], 20, 250);
-    this.engine.typography.print([" then", "press", "enter"], 20, 400);
+    this.engine.typography.print(["input", " name"], 2 * BLOCK_SIZE, BLOCK_SIZE);
+    this.engine.typography.print([this.engine.name], 2 * BLOCK_SIZE, 5 * TEXT_SIZE);
+    this.engine.typography.print([" then", "press", "enter"], 2 * BLOCK_SIZE, 8* TEXT_SIZE);
   }
 }
