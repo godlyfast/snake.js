@@ -3,10 +3,10 @@ import {
   GAME_STATUS_IN_PROGRESS,
   MAX_CLOCK,
   MIN_CLOCK,
-} from "./constants";
-import { Point } from "./interfaces";
-import { Engine } from "./engine";
-import { getRandomInt } from "./util";
+} from "../constants";
+import { Point } from "../interfaces";
+import { Engine } from "../engine";
+import { getRandomInt } from "../util";
 
 export class SnakeScreen {
   engine: Engine;

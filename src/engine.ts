@@ -1,8 +1,8 @@
-import { SnakeScreen } from './snake.screen';
-import { GameOverScreen } from './game-over.screen';
+import { SnakeScreen } from './screens/snake.screen';
+import { GameOverScreen } from './screens/game-over.screen';
 import { SnakeOptions } from "./interfaces";
 import { Typography } from "./typography";
-import { WelcomeScreen } from './welcome.screen'
+import { WelcomeScreen } from './screens/welcome.screen'
 
 import {
   CANVAS_WIDTH,

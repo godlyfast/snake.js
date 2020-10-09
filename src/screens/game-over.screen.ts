@@ -1,5 +1,5 @@
-import { BLOCK_SIZE, GAME_STATUS_OVER, MAX_NAME_LEN } from "./constants";
-import { Engine } from "./engine";
+import { BLOCK_SIZE, GAME_STATUS_OVER, MAX_NAME_LEN } from "../constants";
+import { Engine } from "../engine";
 
 export class GameOverScreen {
   engine: Engine;
