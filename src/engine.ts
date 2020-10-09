@@ -25,15 +25,13 @@ export class Engine {
 
   constructor(options: SnakeOptions) {
     this.options = options;
-    const c = document.createElement("canvas");
-    c.width = CANVAS_WIDTH;
-    c.height = CANVAS_HEIGHT;
-    options.container.appendChild(c);
-    this.canvas = c;
-    const ctx: CanvasRenderingContext2D = c.getContext("2d");
-    this.ctx = ctx;
+    this.canvas = document.createElement("canvas");
+    this.canvas.width = CANVAS_WIDTH;
+    this.canvas.height = CANVAS_HEIGHT;
+    options.container.appendChild(this.canvas);
+    this.ctx = this.canvas.getContext("2d");
 
-    this.typography= new Typography(ctx);
+    this.typography= new Typography(this.ctx);
     this.welcomeScreen = new WelcomeScreen(this)
     this.gameOverScreen = new GameOverScreen(this)
     this.snakeScreen = new SnakeScreen(this)
