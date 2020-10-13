@@ -31,7 +31,7 @@ export class Engine {
     options.container.appendChild(this.canvas);
     this.ctx = this.canvas.getContext("2d");
 
-    this.typography= new Typography(this.ctx);
+    this.typography = new Typography(this.ctx);
     this.welcomeScreen = new WelcomeScreen(this)
     this.gameOverScreen = new GameOverScreen(this)
     this.snakeScreen = new SnakeScreen(this)
